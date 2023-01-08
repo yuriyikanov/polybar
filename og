@@ -1,0 +1,191 @@
+;                 __      __              
+;    ____  ____  / /_  __/ /_  ____ ______
+;   / __ \/ __ \/ / / / / __ \/ __ `/ ___/
+;  / /_/ / /_/ / / /_/ / /_/ / /_/ / /    
+; / .___/\____/_/\__, /_.___/\__,_/_/     
+;/_/            /____/                    
+
+
+[colors]
+
+background = ${xrdb:background:#0d0e11}
+color1 = ${xrdb:color1:#A2906E}
+color2 = ${xrdb:color4:#6E8CAE}
+color3 = ${xrdb:color7:#cacede}
+
+
+[bar/mybar]
+enable-ipc=true
+height = 35
+width = 100%
+bottom = true
+
+background = ${colors.background}
+foreground = ${colors.color1}
+
+line-size = 2
+
+font-0 = Roboto:style=Regular:size=10:antialias=true;3
+
+
+modules-left = i3 xwindow
+modules-center = time
+modules-right = wlan temperature cpu memory pulseaudio
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+wm-restack = i3
+override-redirect = false
+
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+format-foreground = ${colors.color1}
+format-background = ${colors.background}
+index-sort = true
+wrapping-scroll = true
+strip-wsnumbers = true
+enable-click = true
+reverse-scroll = false
+
+label-focused = %name%
+label-focused-background = ${colors.background}
+label-focused-underline = ${colors.color1}
+label-focused-padding = 2
+
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = ${colors.color3}
+label-mode-background = ${colors.color1}
+
+
+label-focused = %index%
+label-focused-overline = ${colors.color1}
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+
+label-urgent = 
+label-urgent-padding = 2
+label-urgent-foreground = ${colors.background}
+label-urgent-background = ${colors.color1}
+label-urgent-overline = ${colors.background}
+label-urgent-font = 2
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:40:...%
+label-color1 = ${colors.color1} 
+label-background = ${colors.background} 
+label-padding = 2
+
+
+[module/time]
+type = internal/date
+interval = 10
+format-margin = 0
+
+time = "%H:%M"
+date = "%d %b"
+
+label =  %date%, %time%
+label-foreground = ${colors.color3}
+label-background = ${colors.background}
+label-padding = 2
+
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 3.0
+
+format-connected =  <label-connected>
+label-connected = %essid%
+label-connected-color1 = ${colors.color1}
+
+;format-disconnected =
+format-disconnected = <label-disconnected>
+label-disconnected = %ifname% disconnected
+label-disconnected-color1 = ${colors.color1}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-color1 = ${colors.color1}
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 55
+
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.color3}
+label-warn-background = ${colors.background}
+label-warn-padding = 2
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.color3}
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-padding = 2
+format-foreground = ${colors.color3}
+label = %percentage%%
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-padding = 2
+format-prefix = " "
+format-foreground = ${colors.color3}
+label = %percentage_used%%
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-margin = 1
+format-volume = <ramp-volume><label-volume>
+label-volume = %percentage:3:3%%
+format-volume-foreground = ${colors.color3}
+format-volume-background = ${colors.background}
+format-volume-padding = 2
+use-ui-max = false
+interval = 5
+
+ramp-volume-0 = ""
+ramp-volume-1 = ""
+ramp-volume-2 = ""
+
+
+label-muted = ""   
+label-muted-background = ${colors.background}
+label-muted-foreground = ${colors.color3}
+label-muted-padding = 2
+
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
